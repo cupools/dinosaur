@@ -1,6 +1,6 @@
 # Dinosaur
 
-An Experimental demo with CreateJS.
+An experimental demo with CreateJS.
 
 ## Install
 

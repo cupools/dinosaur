@@ -18,7 +18,7 @@ module.exports = {
         loaders: [{
             test: /\.js?$/,
             loader: 'babel?presets[]=es2015',
-            exclude: /node_modules/
+            exclude: /node_modules|bower_components/
         }, {
             test: /\.(css)$/,
             loader: 'style!css'
@@ -26,7 +26,13 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin()
+        new webpack.NoErrorsPlugin(),
+        new webpack.ResolverPlugin(
+            new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('bower.json', ['main'])
+        )
     ],
+    resolve: {
+        modulesDirectories: ['node_modules', 'bower_components']
+    },
     devtool: 'eval'
 };
