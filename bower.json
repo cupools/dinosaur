@@ -1,0 +1,17 @@
+{
+  "name": "dinosaur",
+  "description": "An experimental demo with CreateJS",
+  "main": "index.js",
+  "authors": [
+    "cupools"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "createjs"
+  ],
+  "homepage": "",
+  "dependencies": {
+    "EaselJS": "^0.8.2",
+    "TweenJS": "^0.6.2"
+  }
+}
