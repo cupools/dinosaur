@@ -16,12 +16,15 @@ module.exports = {
     },
     module: {
         loaders: [{
-            test: /\.js?$/,
+            test: /\.js$/,
             loader: 'babel?presets[]=es2015',
             exclude: /node_modules|bower_components/
         }, {
-            test: /\.(css)$/,
+            test: /\.css$/,
             loader: 'style!css'
+        }, {
+            test: /\.png$/,
+            loader: 'url?limit=1&name=[name].[ext]'
         }]
     },
     plugins: [

@@ -24,30 +24,30 @@ function init() {
 
     manifest = [
         {
-            src: 'spritesheet_grant.png',
+            src: require('./images/spritesheet_grant.png'),
             id: 'grant'
         },
         {
-            src: 'sky.png',
+            src: require('./images/sky.png'),
             id: 'sky'
         },
         {
-            src: 'ground.png',
+            src: require('./images/grand.png'),
             id: 'ground'
         },
         {
-            src: 'hill1.png',
+            src: require('./images/hill1.png'),
             id: 'hill'
         },
         {
-            src: 'hill2.png',
+            src: require('./images/hill2.png'),
             id: 'hill2'
         }
     ];
 
     loader = new createjs.LoadQueue(false);
     loader.addEventListener('complete', handleComplete);
-    loader.loadManifest(manifest, true, './images/');
+    loader.loadManifest(manifest, true);
 }
 function handleComplete() {
     sky = new createjs.Shape();
