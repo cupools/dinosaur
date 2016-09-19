@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 
-var webpack = require('webpack');
-var path = require('path');
+var webpack = require('webpack')
+var path = require('path')
 
 module.exports = {
     entry: [
@@ -10,14 +10,14 @@ module.exports = {
         './src/index.js'
     ],
     output: {
-        path: path.join(process.cwd(), 'build/asserts/'),
+        path: path.resolve('build/asserts/'),
         filename: 'bundle.js',
         publicPath: '/'
     },
     module: {
         loaders: [{
             test: /\.js?$/,
-            loader: 'babel?presets[]=es2015',
+            loader: 'babel',
             exclude: /node_modules|bower_components/
         }, {
             test: /\.(css)$/,
@@ -32,7 +32,10 @@ module.exports = {
         )
     ],
     resolve: {
-        modulesDirectories: ['node_modules', 'bower_components']
+        modulesDirectories: ['node_modules', 'bower_components'],
+        alias: {
+            'createjs': path.resolve('src/createjs.js')
+        }
     },
     devtool: 'eval'
-};
+}
