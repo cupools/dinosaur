@@ -34,7 +34,8 @@ module.exports = {
     resolve: {
         modulesDirectories: ['node_modules', 'bower_components'],
         alias: {
-            'createjs': path.resolve('src/createjs.js')
+            'createjs': path.resolve('src/createjs.js'),
+            'src': path.resolve('src')
         }
     },
     devtool: 'eval'

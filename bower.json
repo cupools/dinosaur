@@ -13,9 +13,6 @@
   "dependencies": {
     "EaselJS": "^0.8.2",
     "TweenJS": "^0.6.2",
-    "PreloadJS": "^0.6.2",
-    "rxjs": "^4.1.0",
-    "normalize-css": "normalize.css#^4.2.0",
-    "ramda": "^0.22.1"
+    "PreloadJS": "^0.6.2"
   }
 }
