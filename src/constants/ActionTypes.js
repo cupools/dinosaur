@@ -1,4 +1,4 @@
-export const BODY_ADD = 'BODY_ADD'
-export const BODY_RESET = 'BODY_RESET'
+export const SIZE_ADD = 'SIZE_ADD'
+export const SIZE_RESET = 'SIZE_RESET'
 
-export const DIRECTION_SET = 'DIRECTION_SET'
+export const COORDINATE_UPDATE = 'COORDINATE_UPDATE'

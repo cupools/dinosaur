@@ -4,10 +4,11 @@ import createjs from 'createjs'
 import Rx from 'rxjs'
 import R from 'ramda'
 
-import snake from './modal/snake'
-import shaft from './modal/shaft'
+import snake from 'src/modal/snake'
+import shaft from 'src/modal/shaft'
 
-const INITIAL_SPEED = 1
+import * as actions from 'src/redux/actions'
+import store from 'src/redux/store'
 
 const stage = new createjs.Stage('canvas')
 createjs.Touch.enable(stage, false, true)
@@ -20,33 +21,50 @@ let position = R.compose(Promise.resolve.bind(Promise), R.props(['stageX', 'stag
 let mousedown = Rx.Observable.fromEvent(shaft, 'pressmove')
   .flatMap(position)
   .subscribe(
-    data => handlePress(data),
-    data => console.log(data)
+    handlePress,
+    console.log.bind(console)
 )
 
 let tick = Rx.Observable.fromEvent(createjs.Ticker, 'tick')
   .subscribe(
-    _ => handleTick(),
-    data => console.log(data)
+    handleTick(),
+    console.log.bind(console)
 )
 
-// TODO, 暂时把角度挂在 snake 身上
-
 function handleTick() {
-  snake.x += INITIAL_SPEED * (snake.sinX || 1)
-  snake.y += INITIAL_SPEED * (snake.cosX || 1)
-  stage.update()
+  const INITIAL_SPEED = 2
+  const move = R.curry((speed, alpha, a) => (speed * alpha) + a)(INITIAL_SPEED)
+
+  return function updateData() {
+    let state = store.getState()
+    let {coordinate} = state
+    let {pos, sinX, cosX} = coordinate
+
+    store.dispatch(actions.updateCoordinate({
+      pos: [move(sinX, pos[0]), move(cosX, pos[1])]
+    }))
+
+    return updateStage()
+  }
 }
 
-// TODO, 暂时把原坐标挂在 shaft 身上
-
 function handlePress(pos) {
+  let fixed = n => n.toFixed(1)
   let hypotenuse = R.curry(
     (a, b) => Math.pow(Math.pow(a[0] - b[0], 2) + Math.pow(a[1] - b[1], 2), 1 / 2)
   )
-  let fixed = n => n.toFixed(2)
   let calculate = R.compose(fixed, R.divide(R.__, hypotenuse(shaft.origin, pos)))
 
-  snake.sinX = calculate(pos[0] - shaft.origin[0])
-  snake.cosX = calculate(pos[1] - shaft.origin[1])
+  store.dispatch(actions.updateCoordinate({
+    sinX: calculate(pos[0] - shaft.origin[0]),
+    cosX: calculate(pos[1] - shaft.origin[1])
+  }))
+}
+
+function updateStage() {
+  let state = store.getState()
+
+  snake.x = state.coordinate.pos[0]
+  snake.y = state.coordinate.pos[1]
+  stage.update()
 }

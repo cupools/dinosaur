@@ -6,11 +6,13 @@
   "rules": {
     "semi": [2, "never"],
     "comma-dangle": [2, "never"],
+    "object-curly-spacing": [2, "never"],
     "prefer-const": 0,
     "no-use-before-define": 0,
+    "arrow-parens": 0,
 
     "import/no-extraneous-dependencies": [0, "never"],
     "import/no-unresolved": 1,
-    "import/prefer-default-export": [0, "never"],
+    "import/prefer-default-export": [0, "never"]
   }
 }
